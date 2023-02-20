@@ -30,11 +30,12 @@ def main():
     #print(fetch_spacex_last_launch())
     load_dotenv()
     SECRET_KEY = os.getenv("NASA")
-    params = {'api_key': SECRET_KEY}
+    params = {"count": 1, "api_key": SECRET_KEY}
     r = get("https://api.nasa.gov/planetary/apod", params=params)
-    url_foto = r.json()["url"]
-    extension_foto = get_extension(url_foto)
-    print(extension_foto)
+    print(r.json())
+    # url_foto = r.json()["url"]
+    # extension_foto = get_extension(url_foto)
+    # print(extension_foto)
 
 
 if __name__ == "__main__":

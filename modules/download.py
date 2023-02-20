@@ -1,9 +1,11 @@
 import os
 import requests
+from urllib.parse import urlencode
 
 
 def get(value, params=None):
     if params:
+        params = urlencode(params)
         r = requests.get(value, params=params)
     else:
         print("Else")
