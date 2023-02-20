@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from modules.download import get, download
+from modules.get_extension import get_extension
 
 
 def get_last_start(url):
@@ -31,7 +32,9 @@ def main():
     SECRET_KEY = os.getenv("NASA")
     params = {'api_key': SECRET_KEY}
     r = get("https://api.nasa.gov/planetary/apod", params=params)
-    print(r.json()["url"])
+    url_foto = r.json()["url"]
+    extension_foto = get_extension(url_foto)
+    print(extension_foto)
 
 
 if __name__ == "__main__":
