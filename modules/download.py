@@ -2,6 +2,15 @@ import os
 import requests
 
 
+def get(value, params=None):
+    if not params:
+        r = requests.get(value, params=params)
+    else:
+        r = requests.get(value)
+    r.raise_for_status()
+    return r
+
+
 def download(url: str, dest_folder: str, filename=""):
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)  # create folder if it does not exist
