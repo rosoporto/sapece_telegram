@@ -3,9 +3,10 @@ import requests
 
 
 def get(value, params=None):
-    if not params:
+    if params:
         r = requests.get(value, params=params)
     else:
+        print("Else")
         r = requests.get(value)
     r.raise_for_status()
     return r

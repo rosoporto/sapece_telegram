@@ -1,4 +1,6 @@
+import os
 import requests
+from dotenv import load_dotenv
 from modules.download import get, download
 
 
@@ -24,7 +26,12 @@ def fetch_spacex_last_launch(foto_path="foto", prefix="space", id="5eb87d47ffd86
 
 
 def main():
-    print(fetch_spacex_last_launch())
+    #print(fetch_spacex_last_launch())
+    load_dotenv()
+    SECRET_KEY = os.getenv("NASA")
+    params = {'api_key': SECRET_KEY}
+    r = get("https://api.nasa.gov/planetary/apod", params=params)
+    print(r.json()["url"])
 
 
 if __name__ == "__main__":
