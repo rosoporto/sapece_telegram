@@ -26,13 +26,18 @@ def fetch_spacex_last_launch(foto_path="foto", prefix="space", id="5eb87d47ffd86
         return "Complate!"
 
 
+def get_space_foto(api, count_image=3):
+    params = {"count": count_image, "api_key": api}
+    r = get("https://api.nasa.gov/planetary/apod", params=params)
+    return [item["hdurl"] for item in r.json()]
+
+
 def main():
     #print(fetch_spacex_last_launch())
     load_dotenv()
     SECRET_KEY = os.getenv("NASA")
-    params = {"count": 1, "api_key": SECRET_KEY}
-    r = get("https://api.nasa.gov/planetary/apod", params=params)
-    print(r.json())
+    links_fotov = get_space_foto(SECRET_KEY)
+
     # url_foto = r.json()["url"]
     # extension_foto = get_extension(url_foto)
     # print(extension_foto)
