@@ -2,7 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from modules.download import get, download
-from modules.get_extension import get_extension
+from modules.set_filename import set_filename
 
 
 def get_last_start(url):
@@ -32,11 +32,22 @@ def get_space_foto(api, count_image=3):
     return [item["hdurl"] for item in r.json()]
 
 
+def download_nasa_apod(links, path_foto, prefix_name_foto):
+    for index, link in enumerate(links):
+        file_name = set_filename(link, "nasa_apod", "_", str(index))
+        download(link, "Nasa", file_name)
+    else:
+        print("Complate!")
+
+
+
 def main():
     #print(fetch_spacex_last_launch())
     load_dotenv()
     SECRET_KEY = os.getenv("NASA")
-    links_fotov = get_space_foto(SECRET_KEY)
+    links_from_nasa= get_space_foto(SECRET_KEY)
+    download_nasa_apod(links_from_nasa, "Nasa", "nasa_apod")
+
 
     # url_foto = r.json()["url"]
     # extension_foto = get_extension(url_foto)
