@@ -14,7 +14,7 @@ def get(value, params=None):
     return r
 
 
-def download(url: str, dest_folder: str, filename=""):
+def download(url, dest_folder="temp", filename="n0_name", params=None):
     if not os.path.exists(dest_folder):
         os.makedirs(dest_folder)  # create folder if it does not exist
 
@@ -22,7 +22,10 @@ def download(url: str, dest_folder: str, filename=""):
         filename = url.split("/")[-1].replace(" ", "_")  # be careful with file names
     file_path = os.path.join(dest_folder, filename)
 
-    r = requests.get(url, stream=True)
+    if params:
+        r = requests.get(url, params=params, stream=True)
+    else:
+        r = requests.get(url, stream=True)
     if r.ok:
         print("saving to", os.path.abspath(file_path))
         with open(file_path, "wb") as f:
