@@ -15,7 +15,7 @@ def get_last_start(url):
         return r.json()
 
 
-def fetch_spacex_last_launch(foto_path="foto", prefix="space", id="5eb87d47ffd86e000604b38a"):
+def fetch_spacex_last_launch(foto_path, prefix, id="5eb87d47ffd86e000604b38a"):
     url = "https://api.spacexdata.com/v5/launches/" + id
     r = get(url).json()
     photos = r["links"]["flickr"]["original"]
@@ -40,15 +40,8 @@ def download_nasa_apod(links, path_foto, prefix_name_foto):
         print("Complate!")
 
 
-
-def main():
-    #print(fetch_spacex_last_launch())
-    load_dotenv()
-    SECRET_KEY = os.getenv("NASA")
-    # links_from_nasa= get_space_foto(SECRET_KEY)
-    # download_nasa_apod(links_from_nasa, "Nasa", "nasa_apod")
-
-    params = {"api_key": SECRET_KEY}
+def download_nasa_epic(api_key, path_download, prefix_filename):
+    params = {"api_key": api_key}
     url = f"https://api.nasa.gov/EPIC/api/natural/all"
     all_date = get(url, params=params)
     last_date = all_date.json()[0]['date']
@@ -58,13 +51,22 @@ def main():
     for index, snapshot_data in enumerate(fotos_last_day.json()):
         last_date = last_date.replace("-", "/")
         snapshot = f"https://api.nasa.gov/EPIC/archive/natural/{last_date}/png/{snapshot_data['image']}.png"
-        file_name = set_filename(snapshot, "epic_", "_", str(index))
+        file_name = set_filename(snapshot, prefix_filename, "_", str(index))
 
-        download(snapshot, "Nasa_Epic", file_name, params)
+        download(snapshot, path_download, file_name, params)
+    else:
+        return "Complate!"
 
 
 
+def main():
+    #print(fetch_spacex_last_launch("foto", "space"))
+    load_dotenv()
+    SECRET_KEY = os.getenv("NASA")
+    # links_from_nasa= get_space_foto(SECRET_KEY)
+    # download_nasa_apod(links_from_nasa, "Nasa", "nasa_apod")
 
+    download_nasa_epic(SECRET_KEY, "Nasa_Epic", "epic")
 
 
 if __name__ == "__main__":
