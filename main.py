@@ -8,12 +8,12 @@ from fetch_nasa_epic import fetch_nasa_epic
 def main():
     print(fetch_spacex_last_launch("foto", "space"))
 
-    load_dotenv()
-    NASA_KEY = os.getenv("NASA")
+    # load_dotenv()
+    # NASA_KEY = os.getenv("NASA")
 
-    links_from_nasa= fetch_urls_nasa_apod(NASA_KEY)
-    fetch_nasa_apod(links_from_nasa, "Nasa", "nasa_apod")
-    fetch_nasa_epic(NASA_KEY, "Nasa_Epic", "epic")
+    # links_from_nasa= fetch_urls_nasa_apod(NASA_KEY)
+    # fetch_nasa_apod(links_from_nasa, "Nasa_Apod", "apod")
+    # fetch_nasa_epic(NASA_KEY, "Nasa_Epic", "epic")
 
 
 if __name__ == "__main__":
