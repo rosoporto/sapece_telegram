@@ -1,7 +1,7 @@
 from modules.download import get, download
 
 
-def fetch_spacex_last_launch(foto_path, prefix, id="5eb87d47ffd86e000604b38a"):
+def fetch_spacex_last_launch(foto_path, prefix="spacex", id="5eb87d47ffd86e000604b38a"):
     url = "https://api.spacexdata.com/v5/launches/" + id
     r = get(url).json()
     photos = r["links"]["flickr"]["original"]
