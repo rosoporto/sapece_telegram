@@ -16,9 +16,8 @@ def get_path_pictures(folder_with_pics):
     return pics_with_path
 
 
-
 if __name__ == "__main__":
-        parser = argparse.ArgumentParser(description='Полусает пути до картинки в папке')
-        parser.add_argument("FL", help="Имя папки c картинками")
-        args = parser.parse_args()
-        print(get_path_pictures(args.FL))
+    parser = argparse.ArgumentParser(description='Полусает пути до картинки в папке')
+    parser.add_argument("FL", help="Имя папки c картинками")
+    args = parser.parse_args()
+    print(get_path_pictures(args.FL))
