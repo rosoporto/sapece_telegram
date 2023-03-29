@@ -13,13 +13,11 @@ def get_chat_id(token):
         print("Set Start in you're Bot")
 
 
-def send_photo_telegram(token, name_folder_photos):
-        bot = telegram.Bot(token)
-        photos = getImage(name_folder_photos)
-        chat_id = get_chat_id(token)
-        for photo in photos:
-            bot.send_photo(chat_id=chat_id, photo=open(photo, 'rb'))
-        return "Complate!"
+def send_photo_telegram(token, photo):
+    bot = telegram.Bot(token)
+    chat_id = get_chat_id(token)
+    bot.send_photo(chat_id=chat_id, photo=open(photo, 'rb'))
+    return "Complate!"
 
 
 def main():
