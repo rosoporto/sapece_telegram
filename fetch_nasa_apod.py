@@ -4,10 +4,15 @@ from modules.download import get, download
 from modules.set_filename import set_filename
 
 
-def fetch_urls_nasa_apod(api, count_image=3):
+def fetch_urls_nasa_apod(api, count_image=7):
     params = {"count": count_image, "api_key": api}
     r = get("https://api.nasa.gov/planetary/apod", params=params)
-    return [item["hdurl"] for item in r.json()]
+    hdurls = []
+    for item in r.json():
+        hdurl = item.get('hdurl', '')
+        if hdurl:
+            hdurls.append(hdurl)
+    return hdurls
 
 
 def fetch_nasa_apod(links, path_foto, prefix_name_foto):
